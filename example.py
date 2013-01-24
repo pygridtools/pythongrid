@@ -5,8 +5,8 @@
 # the Free Software Foundation; either version 2 of the License, or
 # (at your option) any later version.
 #
-# Written (W) 2008-2012 Christian Widmer
-# Copyright (C) 2008-2012 Max-Planck-Society
+# Written (W) 2008-2013 Christian Widmer
+# Copyright (C) 2008-2013 Max-Planck-Society
 
 
 from pythongrid import KybJob, process_jobs
@@ -48,7 +48,7 @@ def make_jobs():
     for arg in inputvec:
 
         job = KybJob(compute_factorial, arg) 
-        job.h_vmem="1000M"
+        job.h_vmem="1500M"
         
         jobs.append(job)
         

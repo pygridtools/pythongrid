@@ -6,9 +6,9 @@
 # the Free Software Foundation; either version 2 of the License, or
 # (at your option) any later version.
 #
-# Written (W) 2008-2012 Christian Widmer
+# Written (W) 2008-2013 Christian Widmer
 # Written (W) 2008-2010 Cheng Soon Ong
-# Copyright (C) 2008-2012 Max-Planck-Society
+# Copyright (C) 2008-2013 Max-Planck-Society / MSKCC / TU-Berlin
 
 """
 pythongrid provides a high level front-end to DRMAA-python.
@@ -46,8 +46,6 @@ from datetime import datetime
 # import configuration
 from pythongrid_cfg import CFG
 
-##CFG structure loaded 
-
 
 jp = os.path.join
 
@@ -55,6 +53,7 @@ DRMAA_PRESENT = True
 MULTIPROCESSING_PRESENT = True
 MATPLOTLIB_PRESENT = True
 CHERRYPY_PRESENT = True
+
 
 try:
     import drmaa
@@ -72,22 +71,22 @@ except Exception, detail:
     print detail
     MULTIPROCESSING_PRESENT = False
 
-try:
-    import pylab
-except Exception, detail:
-    #print "Error importing pylab. Not plots will be created in debugging emails."
-    #print "Please check your installation."
-    #print detail
-    MATPLOTLIB_PRESENT = False
+if CFG["CREATE_PLOTS"]:
+    try:
+        import pylab
+    except Exception, detail:
+        print "Error importing pylab. Not plots will be created in debugging emails."
+        print "Please check your installation."
+        MATPLOTLIB_PRESENT = False
 
-try:
-    import cherrypy
-except Exception, detail:
-    print "Error importing cherrypy. Web-based monitoring will be disabled."
-    print "Please check your installation."
-    print detail
-    CHERRYPY_PRESENT = False
-
+if CFG["USE_CHERRYPY"]:
+    try:
+        import cherrypy
+    except Exception, detail:
+        print "Error importing cherrypy. Web-based monitoring will be disabled."
+        print "Please check your installation."
+        print detail
+        CHERRYPY_PRESENT = False
 
 
 
@@ -1218,20 +1217,10 @@ def send_error_mail(job):
         msg.attach(img_cpu_attachement)
 
 
-    # send out report
-    #TODO: take this from config file, examine problem with msg length
-    """
-  File "/fml/ag-raetsch/home/cwidmer/svn/tools/python/pythongrid/pythongrid.py", line 1246, in send_error_mail
-    s.sendmail("cwidmer@tuebingen.mpg.de", "ckwidmer@gmail.com", msg.as_string())
-  File "/usr/lib/python2.6/smtplib.py", line 713, in sendmail
-    raise SMTPDataError(code, resp)
-    smtplib.SMTPDataError: (552, 'message line is too long')
-
-    """
-
-    s = smtplib.SMTP(CFG["SMTPSERVER"])
-    s.sendmail(CFG["ERROR_MAIL_SENDER"], CFG["ERROR_MAIL_RECIPIENT"], msg.as_string()[0:CFG["MAX_MSG_LENGTH"]])
-    s.quit()
+    if CFG["SEND_ERROR_MAILS"]:
+        s = smtplib.SMTP(CFG["SMTPSERVER"])
+        s.sendmail(CFG["ERROR_MAIL_SENDER"], CFG["ERROR_MAIL_RECIPIENT"], msg.as_string()[0:CFG["MAX_MSG_LENGTH"]])
+        s.quit()
 
 
 

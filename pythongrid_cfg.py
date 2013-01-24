@@ -5,8 +5,6 @@ import os
 def get_white_list():
     """
     parses output of qstat -f to get list of nodes
-
-    WARNING: possibly MPI Tuebingen specific: make sure this works!
     """
 
     try:
@@ -17,8 +15,7 @@ def get_white_list():
 
         for line in qstat:
 
-            # we kick out all old nodes, node1XX
-            if line.startswith("all.q@") and not line.startswith("all.q@node1"):
+            if line.startswith("all.q@"):
                 tokens = line.strip().split()
                 node_name = tokens[0]
 
@@ -46,14 +43,23 @@ CFG = {}
 
 #default python path
 CFG['PYTHONPATH'] = os.environ['PYTHONPATH']
-CFG['PYGRID']     = "/fml/ag-raetsch/home/cwidmer/Documents/phd/projects/pythongrid/pythongrid.py"
-CFG['TEMPDIR']    = "/fml/ag-raetsch/home/cwidmer/tmp/"
+CFG['PYGRID']     = os.environ['HOME'] + "/Documents/phd/projects/pythongrid/pythongrid.py"
+CFG['TEMPDIR']    = os.environ['HOME'] + "/tmp/"
 
 # error emails
+CFG['SEND_ERROR_MAILS'] = False
 CFG['SMTPSERVER'] = "mailhost.tuebingen.mpg.de"
 CFG['ERROR_MAIL_SENDER'] = "cwidmer@tuebingen.mpg.de"
 CFG['ERROR_MAIL_RECIPIENT'] = "ckwidmer@gmail.com"
 CFG['MAX_MSG_LENGTH'] = 5000
+
+# additional features
+
+# plot cpu and mem usage and send via email
+CFG['CREATE_PLOTS'] = False 
+
+# enable web-interface to monitor jobs
+CFG['USE_CHERRYPY'] = False 
 
 
 # under the hood
@@ -83,7 +89,7 @@ CFG['HEARTBEAT_FREQUENCY'] = 10
 CFG['WHITELIST'] = get_white_list()
 
 # black-list of nodes
-CFG['BLACKLIST'] = ["all.q@node305"]
+CFG['BLACKLIST'] = []
 
 # remove black-list from white-list
 for node in CFG['BLACKLIST']:
