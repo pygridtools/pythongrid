@@ -1,5 +1,7 @@
 pythongrid overview
 
+Main development site: http://code.google.com/p/pythongrid/
+
 This module provides high level functionality for cluster computing in python using the Sun Grid Engine. As some cluster environments are notoriously unreliable, pythongrid attempts to handle job monitoring and resubmission (in case of sudden death of nodes) under the hood, while providing the user with a simple map-reduce like interface.
 
 Main features:
