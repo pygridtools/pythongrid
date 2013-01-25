@@ -2,6 +2,8 @@ pythongrid overview
 
 Main development site: http://code.google.com/p/pythongrid/
 
+Contibutors: Chris Widmer, Cheng Soon Ong
+
 This module provides high level functionality for cluster computing in python using the Sun Grid Engine. As some cluster environments are notoriously unreliable, pythongrid attempts to handle job monitoring and resubmission (in case of sudden death of nodes) under the hood, while providing the user with a simple map-reduce like interface.
 
 Main features:
@@ -16,5 +18,6 @@ Dependencies
 - pyZMQ
 - drmaa-python
 
-related projects
-- ruffus
+Get started (now on Pypi!):
+- easy_install pythongrid
+- adjust pythonrid_cfg.py

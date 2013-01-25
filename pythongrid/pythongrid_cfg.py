@@ -41,9 +41,13 @@ def get_white_list():
 
 CFG = {}
 
+# module path
+path = os.path.abspath(__file__)
+dir_path = os.path.dirname(path)
+
 #default python path
 CFG['PYTHONPATH'] = os.environ['PYTHONPATH']
-CFG['PYGRID']     = os.environ['HOME'] + "/Documents/phd/projects/pythongrid/pythongrid.py"
+CFG['PYGRID']     = dir_path + "/libpythongrid.py"
 CFG['TEMPDIR']    = os.environ['HOME'] + "/tmp/"
 
 # error emails
@@ -95,16 +99,6 @@ CFG['BLACKLIST'] = []
 for node in CFG['BLACKLIST']:
     CFG['WHITELIST'].remove(node)
 
-#paths on cluster file system
-# TODo set this in configuration file
-
-# location of pythongrid.py on cluster file system
-# ToDO set this in configuration file
-
-#PPATH = reduce(lambda x,y: x+':'+y, PYTHONPATH)
-#print PPATH
-#os.environ['PYTHONPATH'] = PPATH
-#sys.path.extend(PYTHONPATH)
 
 if __name__ == '__main__':
 
