@@ -49,44 +49,44 @@ from pythongrid_cfg import CFG
 
 jp = os.path.join
 
-DRMAA_PRESENT = True
-MULTIPROCESSING_PRESENT = True
-MATPLOTLIB_PRESENT = True
-CHERRYPY_PRESENT = True
+DRMAA_PRESENT = False
+MULTIPROCESSING_PRESENT = False
+MATPLOTLIB_PRESENT = False
+CHERRYPY_PRESENT = False
 
 
 try:
     import drmaa
+    DRMAA_PRESENT = True
 except Exception, detail:
     print "Error importing drmaa. Only local multi-threading supported."
     print "Please check your installation."
     print detail
-    DRMAA_PRESENT = False
 
 try:
     import multiprocessing
+    MULTIPROCESSING_PRESENT = True
 except Exception, detail:
     print "Error importing multiprocessing. Local computing limited to one CPU."
     print "Please install python2.6 or the backport of the multiprocessing package"
     print detail
-    MULTIPROCESSING_PRESENT = False
 
 if CFG["CREATE_PLOTS"]:
     try:
         import pylab
+        MATPLOTLIB_PRESENT = True
     except Exception, detail:
         print "Error importing pylab. Not plots will be created in debugging emails."
         print "Please check your installation."
-        MATPLOTLIB_PRESENT = False
 
 if CFG["USE_CHERRYPY"]:
     try:
         import cherrypy
+        CHERRYPY_PRESENT = True
     except Exception, detail:
         print "Error importing cherrypy. Web-based monitoring will be disabled."
         print "Please check your installation."
         print detail
-        CHERRYPY_PRESENT = False
 
 
 
