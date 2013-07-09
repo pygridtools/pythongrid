@@ -15,7 +15,7 @@ def get_white_list():
 
         for line in qstat:
 
-            if line.startswith("all.q@"):
+            if "@" in line:
                 tokens = line.strip().split()
                 node_name = tokens[0]
 
