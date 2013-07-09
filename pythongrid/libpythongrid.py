@@ -1177,7 +1177,7 @@ def send_error_mail(job):
 
 
     # if matplotlib is installed
-    if MATPLOTLIB_PRESENT:
+    if CFG["CREATE_PLOTS"] and MATPLOTLIB_PRESENT:
         
         #TODO: plot to cstring directly (some code is there)
         #imgData = cStringIO.StringIO()

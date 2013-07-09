@@ -1,6 +1,6 @@
 """configuration file for pythongrid"""
 import os
-
+import sys
 
 def get_white_list():
     """
@@ -45,16 +45,19 @@ CFG = {}
 path = os.path.abspath(__file__)
 dir_path = os.path.dirname(path)
 
-#default python path
-CFG['PYTHONPATH'] = os.environ['PYTHONPATH']
+# default python path
+CFG['PYTHONPATH'] = ":".join(sys.path)
+
+print CFG
+
 CFG['PYGRID']     = dir_path + "/libpythongrid.py"
 CFG['TEMPDIR']    = os.environ['HOME'] + "/tmp/"
 
 # error emails
 CFG['SEND_ERROR_MAILS'] = False
-CFG['SMTPSERVER'] = "mailhost.tuebingen.mpg.de"
-CFG['ERROR_MAIL_SENDER'] = "cwidmer@tuebingen.mpg.de"
-CFG['ERROR_MAIL_RECIPIENT'] = "ckwidmer@gmail.com"
+CFG['SMTPSERVER'] = "mailhost.myplace.org"
+CFG['ERROR_MAIL_SENDER'] = "error@myplace.org"
+CFG['ERROR_MAIL_RECIPIENT'] = "recepient@myplace.org"
 CFG['MAX_MSG_LENGTH'] = 5000
 
 # additional features
