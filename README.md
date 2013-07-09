@@ -21,3 +21,8 @@ Dependencies
 Get started (now on Pypi!):
 - easy_install pythongrid
 - adjust pythonrid_cfg.py
+
+Changelog:
+
+- 2013-07-08: fixed some issues with pythongrid_cfg.py
+

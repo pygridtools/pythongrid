@@ -9,7 +9,7 @@ def readme():
        return f.read()
 
 setup(name='pythongrid',
-      version='0.1',
+      version='0.2',
       description='High-level python wapper for the Sun Grid Engine (SGE) using DRMAA and ZMQ',
       long_description=readme(),
       keywords='drmaa sge cluster distributed parallel',
