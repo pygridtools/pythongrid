@@ -11,7 +11,6 @@ def get_white_list():
         qstat = os.popen("qstat -f")
 
         node_names = []
-        norm_loads = []
 
         for line in qstat:
 
@@ -21,14 +20,8 @@ def get_white_list():
 
                 if len(tokens) == 6:
                     continue
-            
-                slots = float(tokens[2].split("/")[2])
-                cpu_load = float(tokens[3])
-
-                norm_load = cpu_load/slots 
 
                 node_names.append(node_name)
-                norm_loads.append(norm_load)
 
         qstat.close()
 
