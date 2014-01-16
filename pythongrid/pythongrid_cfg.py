@@ -43,7 +43,7 @@ CFG['PYTHONPATH'] = ":".join(sys.path)
 
 print CFG
 
-CFG['PYGRID']     = dir_path + "/libpythongrid.py"
+CFG['PYGRID']     = dir_path + "/libpythongrid_wrapper.sh"
 CFG['TEMPDIR']    = os.environ['HOME'] + "/tmp/"
 
 # error emails

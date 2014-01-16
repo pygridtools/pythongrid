@@ -253,7 +253,7 @@ class KybJob(Job):
         define python-style getter
         """
 
-        ret = ""
+        ret = "-b n"
 
         if (self.name != ""):
             ret = ret + " -N " + str(self.name)
@@ -496,7 +496,7 @@ def append_job_to_session(session, job):
         
 
     jt.remoteCommand = os.path.expanduser(CFG['PYGRID'])
-    jt.args = [job.name, job.home_address]
+    jt.args = [os.path.abspath(__file__), job.name, job.home_address]
     jt.joinFiles = True
     jt.nativeSpecification = job.nativeSpecification
     jt.outputPath = ":" + os.path.expanduser(CFG['TEMPDIR'])
